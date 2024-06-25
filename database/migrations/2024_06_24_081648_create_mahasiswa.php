@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('fakultas_id');
             $table->integer('prodi_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
