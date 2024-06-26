@@ -11,16 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->string('nim');
             $table->string('nama');
-            $table->integer('fakultas_id');
-            $table->integer('prodi_id');
+            $table->foreignId('fakultas_id')->references('id')->on('fakultases');
+            $table->foreignId('prodi_id')->references('id')->on('prodis');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
