@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Fakultas;
 use App\Models\Prodi;
+use App\Models\Fakultas;
+use App\Models\Mahasiswa;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class FakultasProdi extends Seeder
 {
@@ -20,7 +21,7 @@ class FakultasProdi extends Seeder
             6 => [
                 'nama' => 'Fakultas Komunikasi dan Diplomasi',
                 'prodi' => [
-                    1 => 'Komunikasi', 
+                    1 => 'Komunikasi',
                     2 => 'Hubungan Internasional',
                 ],
             ],
@@ -48,6 +49,21 @@ class FakultasProdi extends Seeder
                     'kode' => $i,
                 ]);
             }
-        }   
+        }
+
+        $prodiIds = Prodi::pluck('id')->toArray();
+        $fakultasIds = Fakultas::pluck('id')->toArray();
+
+
+        return Mahasiswa::factory()
+            ->count(100)
+            ->make()
+            ->each(function ($mahasiswa) use ($prodiIds, $fakultasIds) {
+                $mahasiswa->fakultas_id = array_rand(array_flip($fakultasIds));
+                $mahasiswa->prodi_id = array_rand(array_flip($prodiIds));
+                $mahasiswa->nim = '10' . Fakultas::find($mahasiswa->fakultas_id)->kode . Prodi::find($mahasiswa->prodi_id)->kode . '24' 
+                . str_pad(Mahasiswa::where('nim', 'like', '10' . Fakultas::find($mahasiswa->fakultas_id)->kode . Prodi::find($mahasiswa->prodi_id)->kode . '24' . '%')->count() + 1, 3, '0', STR_PAD_LEFT);
+                $mahasiswa->save();
+            });
     }
 }
