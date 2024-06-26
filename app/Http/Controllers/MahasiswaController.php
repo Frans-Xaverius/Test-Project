@@ -9,13 +9,12 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswas = Mahasiswa::all(); // Retrieve all Mahasiswa records
+        // $mahasiswas = Mahasiswa::all(); // Retrieve all Mahasiswa records
         // get the fakultas based on mahasiswa fakultas_id
-        $fakultas = $mahasiswas->fakultas_id;
+        // $fakultas = $mahasiswas->fakultas_id;
 
         return view('mahasiswa.index', [
-            'mahasiswas' => $mahasiswas,
-            'fakultas' => $fakultas
+            'mahasiswas' => Mahasiswa::all()
         ]);
     }
 

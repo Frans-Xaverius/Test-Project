@@ -10,12 +10,12 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    public function fakultas_id(): BelongsTo
+    public function Fakultas(): BelongsTo
     {
         return $this->belongsTo(Fakultas::class);
     }
 
-    public function prodi_id(): BelongsTo
+    public function Prodi(): BelongsTo
     {
         return $this->belongsTo(Prodi::class);
     }
