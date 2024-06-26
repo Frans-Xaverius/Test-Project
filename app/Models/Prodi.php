@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prodi extends Model
 {
@@ -11,12 +13,12 @@ class Prodi extends Model
     protected $table = 'prodis';
     public $timestamps = false;
 
-    public function fakultas()
+    public function fakultas(): BelongsTo
     {
         return $this->belongsTo(Fakultas::class, 'fakultas_kode', 'kode');
     }
 
-    public function mahasiswa()
+    public function mahasiswas(): HasMany
     {
         return $this->hasMany(Mahasiswa::class, 'prodi_id', 'id');
     }

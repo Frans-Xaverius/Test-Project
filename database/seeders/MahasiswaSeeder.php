@@ -33,7 +33,5 @@ class MahasiswaSeeder extends Seeder
             'updated_at' => '2024-06-24 08:16:48',
             'created_at' => '2024-06-24 08:16:48'
         ]);
-
-        // Mahasiswa::Factory(20);
     }
 }

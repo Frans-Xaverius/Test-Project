@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fakultas extends Model
 {
@@ -11,13 +12,13 @@ class Fakultas extends Model
     protected $table = 'fakultas';
     public $timestamps = false;
 
-    public function prodi()
+    public function prodis(): HasMany
     {
-        return $this->hasMany(Prodi::class, 'fakultas_kode', 'kode');
+        return $this->hasMany(Prodi::class);
     }
 
-    public function mahasiswa()
+    public function mahasiswas(): HasMany
     {
-        return $this->hasMany(Mahasiswa::class, 'fakultas_id');
+        return $this->hasMany(Mahasiswa::class);
     }
 }
