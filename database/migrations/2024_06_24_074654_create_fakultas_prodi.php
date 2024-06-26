@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('kode');
         });
 
-        Schema::create('prodi', function (Blueprint $table) {
+        Schema::create('prodis', function (Blueprint $table) {
             $table->id();
             $table->string('fakultas_kode');
             $table->string('nama');
