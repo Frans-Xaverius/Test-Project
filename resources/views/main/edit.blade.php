@@ -34,7 +34,6 @@
                     <select id="prodi_id" name="prodi_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option value="">Select Program Studi</option>
                     </select>
-                    <input type="hidden" id="fakultas_id" name="fakultas_id">
                 </div>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
             </form>
@@ -52,7 +51,6 @@
         // Set the hidden input value for fakultas_id
         var fakultas_id = document.getElementById('fakultas_id');
         fakultas_id.value = document.querySelector('select[name="fakultas_kode"] option:checked').getAttribute('data-fakultas-id');
-
         // Make AJAX request
         axios.get('/get-prodi-by-fakultas-kode', {
             params: {
