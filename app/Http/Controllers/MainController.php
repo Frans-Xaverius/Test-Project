@@ -9,10 +9,24 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller {
 
-    public function index()
+    public function index(Request $request)
     {
-        $mahasiswas = $mahasiswas = Mahasiswa::all(); // Fetch all Mahasiswa records
-        return view('main.index', compact('mahasiswas')); // Return the view with the Mahasiswa records
+        $show = $request->query('show', 'saat_ini'); // Ambil nilai query string show, default 'saat_ini'
+
+        switch ($show) {
+            case 'terhapus':
+                $mahasiswas = Mahasiswa::onlyTrashed()->get();
+                break;
+            case 'all':
+                $mahasiswas = Mahasiswa::withTrashed()->get();
+                break;
+            case 'saat_ini':
+            default:
+                $mahasiswas = Mahasiswa::all();
+                break;
+        }
+
+        return view('main.index', compact('mahasiswas'));
     }
 
     public function destroy($id)

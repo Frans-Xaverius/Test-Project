@@ -9,32 +9,43 @@
     <title>Tambah Mahasiswa</title>
 </head>
 <body>
-    <div class="lex items-center justify-center h-screen">
-        <div class="bg-gray-20 p-6 rounded-lg shadow-lg">
-            <h2 class="text-xl mb-4">Tambah Mahasiswa</h2>
+    <div class="flex items-center justify-center h-screen">
+        <div class="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Tambah Mahasiswa</h2>
             <form action="{{ route('main.store') }}" method="POST" id="addMahasiswaForm">
                 @csrf
                 <div class="mb-4">
-                    <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama Mahasiswa:</label>
-                    <input type="text" id="nama" name="nama" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Mahasiswa:</label>
+                    <input type="text" id="nama" name="nama"
+                        class="block w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500"
+                        placeholder="Masukkan Nama Mahasiswa" required>
                 </div>
                 <div class="mb-4">
-                    <label for="fakultas_kode" class="block text-gray-700 text-sm font-bold mb-2">Fakultas:</label>
-                    <select id="fakultas_kode" name="fakultas_kode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="getProdiByFakultasKode()">
-                        <option value="">Select Fakultas</option>
+                    <label for="fakultas_kode" class="block text-sm font-semibold text-gray-700 mb-2">Fakultas:</label>
+                    <select id="fakultas_kode" name="fakultas_kode"
+                        class="block w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500"
+                        onchange="getProdiByFakultasKode()" required>
+                        <option value="">Pilih Fakultas</option>
                         @foreach ($fakultases as $fakultas)
-                            <option value="{{ $fakultas->kode }}" data-fakultas-id="{{ $fakultas->id }}">{{ $fakultas->nama }}</option>
+                        <option value="{{ $fakultas->kode }}" data-fakultas-id="{{ $fakultas->id }}">{{ $fakultas->nama }}</option>
                         @endforeach
                     </select>
                     <input type="hidden" id="fakultas_id" name="fakultas_id">
                 </div>
                 <div class="mb-4">
-                    <label for="prodi_id" class="block text-gray-700 text-sm font-bold mb-2">Program Studi:</label>
-                    <select id="prodi_id" name="prodi_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Select Program Studi</option>
+                    <label for="prodi_id" class="block text-sm font-semibold text-gray-700 mb-2">Program Studi:</label>
+                    <select id="prodi_id" name="prodi_id"
+                        class="block w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500"
+                        required>
+                        <option value="">Pilih Program Studi</option>
+                        {{-- Options will be populated dynamically --}}
                     </select>
                 </div>
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                <div class="mt-6">
+                    <button type="submit"
+                        class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Submit</button>
+                </div>
             </form>
         </div>
     </div>
