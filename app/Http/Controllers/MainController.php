@@ -121,4 +121,19 @@ class MainController extends Controller {
             ->with('success', 'Mahasiswa updated successfully.');
     }
 
+    public function getProdiByFakultasKode(Request $request)
+    {
+        $fakultas_kode = $request->input('fakultas_kode');
+
+        // Retrieve the Fakultas based on the kode
+        $fakultas = Fakultas::where('kode', $fakultas_kode)->first();
+
+        // Retrieve the Prodi associated with the Fakultas
+        if ($fakultas) {
+            $prodis = Prodi::where('fakultas_kode', $fakultas_kode)->get();
+            return response()->json($prodis);
+        } else {
+            return response()->json([], 404); // Return empty array if fakultas kode not found
+        }
+    }
 }

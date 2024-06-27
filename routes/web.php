@@ -23,4 +23,4 @@ Route::prefix('main')->group(function(){
     Route::delete('/{id}', [MainController::class, 'destroy'])->name('main.destroy');
 });
 
-// Route::get('', [MainController::class, 'index'])->name('main.index');
+Route::get('/get-prodi-by-fakultas-kode', [MainController::class, 'getProdiByFakultasKode'])->name('get-prodi-by-fakultas-kode');
