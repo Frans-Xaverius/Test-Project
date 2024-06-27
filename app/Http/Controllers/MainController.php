@@ -93,19 +93,24 @@ class MainController extends Controller {
         $prodi = Prodi::find($request->prodi_id);
         $fakultas = Fakultas::find($request->fakultas_id);
 
-        // create nim
-        $nim = '10' . $fakultas->kode . $prodi->kode . '24';
+        // check if prodi/fakultas change then update nim
+        if ($mahasiswa->prodi_id != $request->prodi_id || $mahasiswa->fakultas_id != $request->fakultas_id) {
+            // create nim
+            $nim = '10' . $fakultas->kode . $prodi->kode . '24';
 
-        // find the last nim
-        $lastNim = Mahasiswa::where('nim', 'like', $nim . '%')->orderBy('nim', 'desc')->first();
+            // find the last nim
+            $lastNim = Mahasiswa::where('nim', 'like', $nim . '%')->orderBy('nim', 'desc')->first();
 
-        // if there is a last nim, increment the last 3 digits
-        if ($lastNim) {
-            $lastNim = (int) substr($lastNim->nim, -3);
-            $lastNim++;
-            $nim .= str_pad($lastNim, 3, '0', STR_PAD_LEFT);
+            // if there is a last nim, increment the last 3 digits
+            if ($lastNim) {
+                $lastNim = (int) substr($lastNim->nim, -3);
+                $lastNim++;
+                $nim .= str_pad($lastNim, 3, '0', STR_PAD_LEFT);
+            } else {
+                $nim .= '001';
+            }
         } else {
-            $nim .= '001';
+            $nim = $mahasiswa->nim;
         }
 
         $mahasiswa->update(
