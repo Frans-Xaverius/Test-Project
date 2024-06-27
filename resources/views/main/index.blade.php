@@ -23,8 +23,6 @@
                     <th scope="col" class="px-6 py-3">Prodi</th>
                     <th scope="col" class="px-6 py-3">Edit</th>
                     <th scope="col" class="px-6 py-3">Hapus</th>
-                    
-                    <!-- Add more columns as needed -->
                 </tr>
             </thead>
             <tbody>
@@ -38,10 +36,9 @@
                         <td class="px-6 py-4">
                             <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('main.edit', $mahasiswa->id) }}">Edit</a>
                         <td class="px-6 py-4">
-                            <form action="{{ route('main.destroy', $mahasiswa->id) }}" method="POST">
+                            <form action="{{ route('main.softdelete', $mahasiswa->id) }}" method="POST" id="deleteForm">
                                 @csrf
-                                @method('DELETE')
-                                {{-- add tailwind styling for delete button --}}
+                                @method('PUT') <!-- Ensure method is PUT for form -->                            
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button>
                             </form>
                     </tr>

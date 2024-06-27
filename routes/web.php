@@ -22,5 +22,6 @@ Route::prefix('main')->group(function(){
     Route::put('/{mahasiswa}', [MainController::class, 'update'])->name('main.update');
     Route::delete('/{id}', [MainController::class, 'destroy'])->name('main.destroy');
 });
-
+Route::put('/main/{id}/softdelete', [MainController::class, 'softDelete'])->name('main.softdelete');
+Route::delete('/main/{id}/softdelete', [MainController::class, 'softDelete'])->name('main.softdelete');
 Route::get('/get-prodi-by-fakultas-kode', [MainController::class, 'getProdiByFakultasKode'])->name('get-prodi-by-fakultas-kode');

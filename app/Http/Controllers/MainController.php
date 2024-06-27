@@ -141,4 +141,15 @@ class MainController extends Controller {
             return response()->json([], 404); // Return empty array if fakultas kode not found
         }
     }
+
+    public function softDelete($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        // Soft delete the mahasiswa
+        $mahasiswa->delete();
+
+        // Optionally, redirect with a success message
+        return redirect()->route('main.index')->with('success', 'Mahasiswa successfully soft deleted.');
+    }
 }
