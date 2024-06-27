@@ -10,12 +10,16 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    public function Fakultas(): BelongsTo
+    protected $table = 'mahasiswas';
+    protected $with = ['fakultas', 'prodi'];
+    protected $fillable = ['nama', 'prodi_id', 'fakultas_id', 'nim'];
+
+    public function fakultas(): BelongsTo
     {
         return $this->belongsTo(Fakultas::class);
     }
 
-    public function Prodi(): BelongsTo
+    public function prodi(): BelongsTo
     {
         return $this->belongsTo(Prodi::class);
     }

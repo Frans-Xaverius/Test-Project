@@ -13,13 +13,8 @@ class Prodi extends Model
     protected $table = 'prodis';
     public $timestamps = false;
 
-    public function fakultas(): BelongsTo
-    {
-        return $this->belongsTo(Fakultas::class, 'fakultas_kode', 'kode');
-    }
-
     public function mahasiswas(): HasMany
     {
-        return $this->hasMany(Mahasiswa::class, 'prodi_id', 'id');
+        return $this->hasMany(Mahasiswa::class);
     }
 }

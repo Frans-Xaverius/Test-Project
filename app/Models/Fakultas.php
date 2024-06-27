@@ -9,13 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Fakultas extends Model
 {
     use HasFactory;
-    protected $table = 'fakultas';
+    protected $table = 'fakultases';
     public $timestamps = false;
-
-    public function prodis(): HasMany
-    {
-        return $this->hasMany(Prodi::class);
-    }
 
     public function mahasiswas(): HasMany
     {
