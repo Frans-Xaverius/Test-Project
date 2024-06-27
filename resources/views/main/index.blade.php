@@ -44,14 +44,18 @@
                     <td class="px-6 py-4">{{ $mahasiswa->fakultas->nama }}</td>
                     <td class="px-6 py-4">{{ $mahasiswa->prodi->nama }}</td>
                     <td class="px-6 py-4">
-                        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('main.edit', $mahasiswa->id) }}">Edit</a>
+                        @if (!$mahasiswa->trashed())
+                            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('main.edit', $mahasiswa->id) }}">Edit</a>
+                        @endif
                     </td>
                     <td class="px-6 py-4">
-                        <form action="{{ route('main.softdelete', $mahasiswa->id) }}" method="POST" id="deleteForm">
-                            @csrf
-                            @method('PUT') <!-- Ensure method is PUT for form -->
-                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button>
-                        </form>
+                        @if (!$mahasiswa->trashed())
+                            <form action="{{ route('main.softdelete', $mahasiswa->id) }}" method="POST" id="deleteForm">
+                                @csrf
+                                @method('PUT') <!-- Ensure method is PUT for form -->
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
